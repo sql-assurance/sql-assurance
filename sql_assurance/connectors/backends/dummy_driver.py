@@ -1,0 +1,10 @@
+class DummyConnector(object):
+    def __init__(self, config):
+        self.__config = config
+
+    def query(self, sql_statement):
+        pass
+
+    @property
+    def config(self):
+        return self.__config

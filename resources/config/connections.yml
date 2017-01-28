@@ -1,0 +1,7 @@
+---
+imapala_test:
+  connector: impala
+  config:
+    host: "test"
+    port: "test"
+    database: "test"
