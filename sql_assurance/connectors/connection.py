@@ -1,8 +1,8 @@
 import os
 import yaml
 
-from backends import *
-from sql_assurance.connectors.backends import impala_driver
+from drivers import *
+from sql_assurance.connectors.drivers import impala_driver
 
 
 class ConnectionFactory(object):
