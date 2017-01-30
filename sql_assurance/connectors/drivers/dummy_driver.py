@@ -1,9 +1,13 @@
+from time import sleep
+
+
 class DummyConnector(object):
     def __init__(self, config):
         self.__config = config
 
     def query(self, sql_statement):
-        pass
+        sleep(1)
+        return []
 
     @property
     def config(self):

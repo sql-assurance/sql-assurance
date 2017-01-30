@@ -11,7 +11,9 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'impyla',
-    'PyYaml'
+    'PyYaml',
+    'celery',
+    'numpy'
 ]
 
 test_requirements = [

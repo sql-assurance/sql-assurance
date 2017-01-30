@@ -29,12 +29,24 @@ class ConnectionPool(object):
     def __init__(self, config_path):
         self.__config = self._load_config(config_path)
         self.__connections = {}
+        self.__connection_factory = ConnectionFactory()
 
     def get_connection(self, connection_id):
         if connection_id not in self.__config:
             raise ValueError(
                 "Connection {} do not exists".format(connection_id)
             )
+
+        if connection_id in self.__connections:
+            return self.__connections['connection_id']
+
+        connection = self.__connection_factory.get_connection(
+            self.__config[connection_id]['driver'], self.__config[connection_id]
+        )
+
+        self.__connections[connection_id] = connection
+
+        return connection
 
     @property
     def config(self):

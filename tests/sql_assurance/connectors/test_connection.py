@@ -36,13 +36,10 @@ class TestConnectionPool(unittest.TestCase):
     def test_get_dummy_connection(self):
         config = self.connection.config
 
-        expected_output = {
-            'imapala_test':
-                {
-                    'connector': 'impala',
-                    'config': {'host': 'test', 'port': 'test', 'database': 'test'}
-                }
-        }
+        expected_output = dict(connectors={
+            'impala': {'host': 'test', 'port': 1234}
+        }, tests={
+            'impala_test': {'connector': 'impala', 'config': {'database': 'test'} }})
 
         self.assertEqual(expected_output, config)
 

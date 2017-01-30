@@ -1,7 +1,10 @@
 ---
 imapala_test:
-  connector: impala
+  driver: impala
   config:
     host: "test"
     port: "test"
     database: "test"
+
+dummy_test:
+  driver: dummy

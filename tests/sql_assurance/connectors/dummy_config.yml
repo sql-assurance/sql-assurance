@@ -1,7 +1,11 @@
 ---
-imapala_test:
-  connector: impala
-  config:
+connectors:
+  impala:
     host: "test"
-    port: "test"
-    database: "test"
+    port: 1234
+
+tests:
+  impala_test:
+    connector: "impala"
+    config:
+      database: "test"
