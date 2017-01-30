@@ -42,10 +42,9 @@ class PerformanceTest(object):
                 timedelta(seconds=float(end_time - start_time)).total_seconds()
             )
 
-            end_result = mean(results)
+        end_result = mean(results)
 
-            if not float(end_result) > float(median_lower_than):
-                raise Exception("Test {} failed".format(self.test_name))
+        if float(end_result) > float(median_lower_than):
+            raise Exception("Test {} failed".format(self.test_name))
 
-            return True
-
+        return True
