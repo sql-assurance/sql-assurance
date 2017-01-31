@@ -26,12 +26,23 @@ def set_connector(connection):
     return wrapper
 
 
-class PerformanceTest(object):
+class TestCase(object):
     def __init__(self):
-        # How to pass the ConnectionPool?
         pass
 
-    def assert_timing(self, query, attempts=3, median_lower_than=1.5):
+
+class PerformanceTestCase(TestCase):
+    def __init__(self):
+        super(PerformanceTestCase, self).__init__()
+
+    def assert_timing(self, query, attempts=3, mean_lower_than=1.5):
+        """
+        :param query: Which query we need to execute to a given connector
+        :param attempts: Number of times that query should be executed
+        :param mean_lower_than: Total mean should be lower than this value
+        :return: True / Raise exception
+        """
+
         results = []
         for i in xrange(0, attempts):
             start_time = time.time()
@@ -44,7 +55,14 @@ class PerformanceTest(object):
 
         end_result = mean(results)
 
-        if float(end_result) > float(median_lower_than):
-            raise Exception("Test {} failed".format(self.test_name))
+        if float(end_result) > float(mean_lower_than):
+            raise Exception("Test {} failed, expected lower than {} and result was {}".format(
+                self.test_name, mean_lower_than, end_result
+            ))
 
         return True
+
+
+class StatisticalHypothesisTest(TestCase):
+    def __init__(self):
+        super(StatisticalHypothesisTest, self).__init__()
