@@ -1,5 +1,5 @@
 ===============================
-SQLAssurance
+SQLAssurance (Under heavy development)
 ===============================
 
 SQLAssurance is a programmer oriented SQL Testing framework. A full name for this kind of testing could be: Scheduled SQL Testing.
