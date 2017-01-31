@@ -23,6 +23,8 @@ class Finder(object):
 
         for file in files:
             module_path = self._get_name_from_path(file)
+            print module_path
+            exit()
             module = self._get_module_from_name(module_path)
             tests = self._get_tests_from_module(module)
 

@@ -11,9 +11,9 @@ class Runner(object):
 
     def run(self, test_suite):
         for test in test_suite:
-            self.__executer(test)
+            self.__executor(test)
 
-    def __executer(self, test):
+    def __executor(self, test):
         module_ = test.__module__
         class_ = test.im_class.__name__
         method_ = test.__name__
