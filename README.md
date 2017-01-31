@@ -34,14 +34,14 @@ For testing purposes we have created different Test Cases, at the moment we are 
 ```python
 class DummyTest(PerformanceTestCase):
     @set_connector(connection='impala_staging')
-    def test_something_weird(self):
+    def test_collect_customers_for_us(self):
         self.assert_timing("select * from customers where country='US' limit 100", 3, 3)
 
     @set_connector(connection='impala_production')
-    def test_something_different(self):
+    def test_joining_orders_and_customers(self):
         self.assert_timing("select * from orders left join customers on fk_customer = id_customer limit 10, 2, 1.2)
 
     @set_connector(connection='mysql_connection')
-    def test_failing_condition(self):
+    def test_grouping_orders_by_week(self):
         self.assert_timing('select * from orders group by week', 4, 0.2)
 ```
