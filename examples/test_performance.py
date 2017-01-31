@@ -4,7 +4,7 @@ from sql_assurance.test.cases import set_connector
 
 class MyDummyConnectorTest(PerformanceTestCase):
     @set_connector(connection="dummy_test")
-    def test_some_quer(self):
+    def test_some_query(self):
         self.assert_timing(
             "select * from everything",
             3,
