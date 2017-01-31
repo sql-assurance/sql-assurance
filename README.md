@@ -28,5 +28,4 @@ For testing purposes we have created different Test Cases, at the moment we are 
 
 - **PerformanceTestCase**: It tries to execute specific query as many times as you specified calculating at the end the mean, to succeed on this test the mean should be lower than the one provided on the expected value.
 
-* Free software: MIT license
-* Documentation: https://sql-assurance.readthedocs.io.
+- **StatisticalHypothesisTestCase**: This test case helps you to assure the quality of your data, for instance, today I had 1000 new records on this table, does that makes sense comparing with the historical data you have?
