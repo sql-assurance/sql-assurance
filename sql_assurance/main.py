@@ -4,6 +4,7 @@ from argparse import ArgumentParser
 from finder import Finder
 from termcolor import colored
 from runner import Runner
+from config import settings
 
 
 

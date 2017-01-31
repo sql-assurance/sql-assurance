@@ -5,15 +5,15 @@ from datetime import timedelta
 from functools import wraps
 
 from sql_assurance.connectors.connection import ConnectionPool
+from sql_assurance.config import path_to_config_file
 
 
 def set_connector(connection):
     def wrapper(f):
         @wraps(f)
         def wrapped(self, *args, **kwargs):
-            # TODO: Find a way to get this global ConnectionPool
             connection_pool = ConnectionPool(
-                '/Users/ssola/datawarehouse-env/dwh-dev/repositories/sql-assurance/resources/config/connections.yml'
+                path_to_config_file
             )
 
             self.__class__.test_name = f.__name__
