@@ -1,7 +1,9 @@
 import os
-from argparse import ArgumentParser
 
+from argparse import ArgumentParser
 from finder import Finder
+from termcolor import colored
+
 
 
 _LOGO = """
@@ -23,9 +25,11 @@ class SQLAssurance(object):
         args = self._parse_args()
 
         if not os.path.exists(args.path):
-            raise ValueError("Configurations: File {} not found".format(
-                args.path
-            ))
+            print colored(
+                'Error: {} file do not exists'.format(args.path),
+                'red'
+            )
+            exit(-1)
 
         if not os.path.exists(args.tests):
             raise ValueError("Tests not found".format(

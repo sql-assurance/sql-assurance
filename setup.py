@@ -13,7 +13,8 @@ requirements = [
     'impyla',
     'PyYaml',
     'celery',
-    'numpy'
+    'numpy',
+    'termcolor'
 ]
 
 test_requirements = [
