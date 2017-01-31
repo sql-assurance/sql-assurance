@@ -3,13 +3,14 @@
 
 from setuptools import setup
 
-with open('README.rst') as readme_file:
+with open('README.md') as readme_file:
     readme = readme_file.read()
 
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
+    'thrift==0.9.3',
     'impyla',
     'PyYaml',
     'celery',

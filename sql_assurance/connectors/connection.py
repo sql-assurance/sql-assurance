@@ -17,9 +17,9 @@ class ConnectionFactory(object):
 
         if connection == "impala":
             return impala_driver.ImpalaConnector(
-                host=config["host"],
-                port=config["port"],
-                database=config["database"]
+                host=config["config"]["host"],
+                port=config["config"]["port"],
+                database=config["config"]["database"]
             )
         elif connection == "dummy":
             return dummy_driver.DummyConnector(config)

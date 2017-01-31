@@ -19,13 +19,12 @@ class Finder(object):
 
     def _find_tests(self, start_dir):
         files = self._load_files(start_dir)
-        test = []
         tests = []
 
         for file in files:
             module_path = self._get_name_from_path(file)
             module = self._get_module_from_name(module_path)
-            tests = self._get_tests_from_module(module)
+            tests += self._get_tests_from_module(module)
 
         return TestSuite(tests)
 

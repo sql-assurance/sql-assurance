@@ -9,13 +9,16 @@ class ImpalaConnector(object):
 
         self.__host = kwargs.get("host")
         self.__port = kwargs.get("port")
-        self.__database = kwargs.get("database")
+        self.__database = None
+
+        if kwargs.get("database"):
+            self.__database = kwargs.get("database")
         self.__connection = self._establish_connection()
 
     def query(self, sql_statement):
-        data = self.__connection.execute(sql_statement)
+        self.__connection.execute(sql_statement)
 
-        return data
+        return self.__connection.fetchall()
 
     def _establish_connection(self):
         self.__connection = connect(
