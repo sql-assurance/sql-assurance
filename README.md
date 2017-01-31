@@ -39,7 +39,7 @@ class DummyTest(PerformanceTestCase):
 
     @set_connector(connection='impala_production')
     def test_joining_orders_and_customers(self):
-        self.assert_timing("select * from orders left join customers on fk_customer = id_customer limit 10, 2, 1.2)
+        self.assert_timing("select * from orders left join customers on fk_customer = id_customer limit 10', 2, 1.2)
 
     @set_connector(connection='mysql_connection')
     def test_grouping_orders_by_week(self):
