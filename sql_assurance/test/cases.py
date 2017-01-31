@@ -4,7 +4,7 @@ from numpy import mean
 from datetime import timedelta
 from functools import wraps
 
-from sql_assurance.connectors.connection import ConnectionPool
+from sql_assurance.connectors.connection import ConnectionPoolBuilder
 from sql_assurance.config import path_to_config_file
 
 
@@ -12,7 +12,7 @@ def set_connector(connection):
     def wrapper(f):
         @wraps(f)
         def wrapped(self, *args, **kwargs):
-            connection_pool = ConnectionPool(
+            connection_pool = ConnectionPoolBuilder(
                 path_to_config_file
             )
 
@@ -20,9 +20,7 @@ def set_connector(connection):
             self.__class__.connector = connection_pool.get_connection(connection)
 
             return f(self, *args, **kwargs)
-
         return wrapped
-
     return wrapper
 
 

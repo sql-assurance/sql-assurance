@@ -25,6 +25,15 @@ class ConnectionFactory(object):
             return dummy_driver.DummyConnector(config)
 
 
+class ConnectionPoolBuilder(object):
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = ConnectionPool(args[0])
+        return cls._instance
+
+
 class ConnectionPool(object):
     def __init__(self, config_path):
         self.__config = self._load_config(config_path)
