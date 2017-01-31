@@ -3,6 +3,7 @@ import sys
 import fnmatch
 
 from test.cases import TestCase
+from suite import TestSuite
 
 
 class Finder(object):
@@ -12,18 +13,20 @@ class Finder(object):
         pass
 
     def find(self, path):
-        tests = self._find_tests(path)
+        test_suite = self._find_tests(path)
+
+        return test_suite
 
     def _find_tests(self, start_dir):
         files = self._load_files(start_dir)
+        test = []
 
         for file in files:
             module_path = self._get_name_from_path(file)
             module = self._get_module_from_name(module_path)
             tests = self._get_tests_from_module(module)
-            exit()
 
-        return files
+        return TestSuite(tests)
 
     def _load_files(self, start_dir):
         file_list = []

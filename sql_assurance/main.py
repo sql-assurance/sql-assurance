@@ -3,6 +3,7 @@ import os
 from argparse import ArgumentParser
 from finder import Finder
 from termcolor import colored
+from runner import Runner
 
 
 
@@ -19,6 +20,7 @@ _LOGO = """
 class SQLAssurance(object):
     def __init__(self):
         self.__finder = Finder()
+        self.__runner = Runner()
 
     def run(self):
         print _LOGO
@@ -36,7 +38,12 @@ class SQLAssurance(object):
                 args.tests
             ))
 
-        self.__finder.find(args.tests)
+        # Find the test suite we need to execute
+        test_suite = self.__finder.find(args.tests)
+
+        # Run the test suite
+        self.__runner.run(test_suite)
+
 
     @staticmethod
     def _parse_args():

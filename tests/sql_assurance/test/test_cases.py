@@ -6,8 +6,16 @@ from sql_assurance.test.cases import set_connector
 
 class DummyTest(PerformanceTestCase):
     @set_connector(connection='dummy_test')
-    def test_something_weird(self, query, attempts=3, mean_lower_than=0.9):
-        self.assert_timing(query, attempts, mean_lower_than)
+    def test_something_weird(self):
+        self.assert_timing("test query", 3, 3)
+
+    @set_connector(connection='dummy_test')
+    def test_something_different(self):
+        self.assert_timing("another query", 2, 1.2)
+
+    @set_connector(connection='dummy_test')
+    def test_failing_condition(self):
+        self.assert_timing('another query', 4, 0.2)
 
 
 class TestPerformanceTest(unittest.TestCase):
