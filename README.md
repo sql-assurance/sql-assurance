@@ -10,7 +10,6 @@ This testing framework is able to work in a two different modes:
 
 ![SQLAssurance](http://i.imgur.com/6DtPK9X.png)
 
-
 * Free software: MIT license
 * Documentation: https://sql-assurance.readthedocs.io.
 
