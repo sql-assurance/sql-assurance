@@ -41,10 +41,11 @@ class Finder(object):
         for name in dir(module):
             obj = getattr(module, name)
             if isinstance(obj, type) and issubclass(obj, TestCase):
-                instance_ = obj()
-                getattr(instance_, 'test_something_weird')("test")
+                methods = [method for method in dir(obj()) if method[0:5] == "test_"]
+                for method in methods:
+                    tests.append(getattr(obj(), method))
 
-            exit()
+        return tests
 
     @staticmethod
     def _get_module_from_name(name):
