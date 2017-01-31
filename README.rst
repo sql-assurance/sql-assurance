@@ -2,23 +2,13 @@
 SQLAssurance
 ===============================
 
+SQLAssurance is a programmer oriented SQL Testing framework. A full name for this kind of testing could be: Scheduled SQL Testing.
 
-.. image:: https://img.shields.io/pypi/v/sql_assurance.svg
-        :target: https://pypi.python.org/pypi/sql_assurance
+This testing framework is able to work in a two different modes:
 
-.. image:: https://img.shields.io/travis/ssola/sql_assurance.svg
-        :target: https://travis-ci.org/ssola/sql_assurance
+1. You can execute tthe sql-assurance script like any other testing framework, you will have as a result something like the image below this text:
 
-.. image:: https://readthedocs.org/projects/sql-assurance/badge/?version=latest
-        :target: https://sql-assurance.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
-
-.. image:: https://pyup.io/repos/github/ssola/sql_assurance/shield.svg
-     :target: https://pyup.io/repos/github/ssola/sql_assurance/
-     :alt: Updates
-
-
-Audit your databases
+![Imgur](http://i.imgur.com/6DtPK9X.png)
 
 
 * Free software: MIT license
