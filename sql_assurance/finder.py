@@ -2,7 +2,7 @@ import os
 import sys
 import fnmatch
 
-from test.cases import TestCase
+from test.cases import SQLTestCase
 from suite import TestSuite
 
 
@@ -21,10 +21,11 @@ class Finder(object):
         files = self._load_files(start_dir)
         tests = []
 
-        for file in files:
-            module_path = self._get_name_from_path(file)
+        for file_ in files:
+            module_path = self._get_name_from_path(file_)
             module = self._get_module_from_name(module_path)
             tests += self._get_tests_from_module(module)
+
 
         return TestSuite(tests)
 
@@ -43,7 +44,7 @@ class Finder(object):
 
         for name in dir(module):
             obj = getattr(module, name)
-            if isinstance(obj, type) and issubclass(obj, TestCase):
+            if isinstance(obj, type) and issubclass(obj, SQLTestCase):
                 methods = [method for method in dir(obj()) if method[0:5] == "test_"]
                 for method in methods:
                     tests.append(getattr(obj(), method))

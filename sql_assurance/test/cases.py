@@ -1,4 +1,6 @@
 import time
+import hashlib
+import time
 
 from numpy import mean
 from datetime import timedelta
@@ -20,18 +22,37 @@ def set_connector(connection):
             self.__class__.connector = connection_pool.get_connection(connection)
 
             return f(self, *args, **kwargs)
+
         return wrapped
+
     return wrapper
 
 
-class TestCase(object):
+class SQLTestCase(object):
     def __init__(self):
-        pass
+        self._queries_executed = {}
+
+        super(SQLTestCase, self).__init__()
+
+    def _execute_query(self, query):
+        raise NotImplementedError("This TestCase should implement the execute_query")
+
+    def _get_query_hash(self, query):
+        return hashlib.md5("{}.{}".format(query, str(time.time()))).hexdigest()
+
+    def __del__(self):
+        if self._queries_executed:
+            pass
 
 
-class PerformanceTestCase(TestCase):
+class PerformanceTestCase(SQLTestCase):
     def __init__(self):
         super(PerformanceTestCase, self).__init__()
+
+    def _execute_query(self, query):
+        data = self.connector.query(query)
+
+        return self._get_query_hash(query), data
 
     def assert_timing(self, query, attempts=3, mean_lower_than=1.5):
         """
@@ -44,7 +65,7 @@ class PerformanceTestCase(TestCase):
         results = []
         for i in xrange(0, attempts):
             start_time = time.time()
-            self.connector.query(query)
+            query_hash, data = self._execute_query(query)
             end_time = time.time()
 
             results.append(
@@ -53,7 +74,20 @@ class PerformanceTestCase(TestCase):
 
         end_result = mean(results)
 
+        test_passed = True
         if float(end_result) > float(mean_lower_than):
+            test_passed = False
+
+        # store results
+        self._queries_executed[query_hash] = {
+            "test_passed": test_passed,
+            "execution_time": end_result,
+            "expected_value": mean_lower_than,
+            "query": query,
+            "executed_at": time.time()
+        }
+
+        if not test_passed:
             raise Exception("Test {} failed, expected lower than {} and result was {}".format(
                 self.test_name, mean_lower_than, end_result
             ))
@@ -61,6 +95,6 @@ class PerformanceTestCase(TestCase):
         return True
 
 
-class StatisticalHypothesisTest(TestCase):
+class StatisticalHypothesisTest(SQLTestCase):
     def __init__(self):
         super(StatisticalHypothesisTest, self).__init__()

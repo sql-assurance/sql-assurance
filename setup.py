@@ -15,7 +15,8 @@ requirements = [
     'PyYaml',
     'celery',
     'numpy',
-    'termcolor'
+    'termcolor',
+    'unittest2'
 ]
 
 test_requirements = [
