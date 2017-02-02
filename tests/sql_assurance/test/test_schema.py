@@ -26,7 +26,7 @@ class AssertSchemaTest(unittest.TestCase):
 
     def test_it_returns_proper_schema_checker(self):
         self.assertIsInstance(
-            SchemaCheckerFactory.get_schema_checker('/path/file.avro'),
+            SchemaCheckerFactory.get_schema_checker('/path/file.avsc'),
             AvroSchemaChecker
         )
 
@@ -37,3 +37,15 @@ class AssertSchemaTest(unittest.TestCase):
         self.assertTrue(
             'Checker unsupported not supported' in context.exception
         )
+
+
+class AvroSchemaCheckerTest(unittest.TestCase):
+    def test_with_valid_schema(self):
+        data = {
+            "name": "My Name",
+            "favorite_number": 10,
+            "favorite_color": "red"
+        }
+
+        checker = AvroSchemaChecker()
+        checker.check_schema(data, 'fixtures/test.avsc')

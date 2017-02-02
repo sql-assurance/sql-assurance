@@ -1,4 +1,9 @@
 import os
+import avro.schema
+
+from avro.datafile import DataFileReader, DataFileWriter
+from avro.io import DatumReader, DatumWriter
+
 
 
 class SchemaChecker(object):
@@ -8,7 +13,16 @@ class SchemaChecker(object):
 
 class AvroSchemaChecker(SchemaChecker):
     def check_schema(self, data, schema_path):
-        pass
+        schema = avro.schema.Parse(
+            open(schema_path, "rb").read().decode("utf-8")
+        )
+
+        writer = DataFileWriter(
+            open('_test.avro', "wb"), DatumWriter(), schema
+        )
+
+        writer.append(data)
+        writer.close()
 
 
 class SchemaCheckerFactory(object):
@@ -16,7 +30,7 @@ class SchemaCheckerFactory(object):
     def get_schema_checker(schema_path=None):
         file_extension = SchemaCheckerFactory._get_extension_from_path(schema_path)
 
-        if file_extension == 'avro':
+        if file_extension == 'avsc':
             return AvroSchemaChecker()
 
         raise ValueError("Checker {} not supported".format(file_extension))

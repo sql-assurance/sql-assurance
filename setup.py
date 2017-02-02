@@ -11,6 +11,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'thrift==0.9.3',
+    'avro==1.8.1',
     'impyla',
     'PyYaml',
     'celery',
