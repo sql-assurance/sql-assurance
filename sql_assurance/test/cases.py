@@ -1,4 +1,4 @@
-import time
+import os
 import hashlib
 import time
 
@@ -33,6 +33,10 @@ class SQLTestCase(object):
         self._queries_executed = {}
 
         super(SQLTestCase, self).__init__()
+
+    def assert_schema(self, query, schema_path):
+        if not os.path.exists(schema_path):
+            raise ValueError("Schema path {} not found".format(schema_path))
 
     def _execute_query(self, query):
         raise NotImplementedError("This TestCase should implement the execute_query")
