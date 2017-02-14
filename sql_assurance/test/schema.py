@@ -48,4 +48,4 @@ class AssertSchema(object):
 
         checker = SchemaCheckerFactory.get_schema_checker(schema_path)
 
-
+        return checker.check_schema(data, schema_path)

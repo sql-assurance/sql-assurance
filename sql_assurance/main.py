@@ -19,9 +19,9 @@ _LOGO = """
 
 
 class SQLAssurance(object):
-    def __init__(self):
-        self.__finder = Finder()
-        self.__runner = Runner()
+    def __init__(self, finder=None, runner=None):
+        self.__finder = finder if finder else Finder()
+        self.__runner = runner if runner else Runner()
 
     def run(self):
         print _LOGO

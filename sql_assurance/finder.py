@@ -26,7 +26,6 @@ class Finder(object):
             module = self._get_module_from_name(module_path)
             tests += self._get_tests_from_module(module)
 
-
         return TestSuite(tests)
 
     def _load_files(self, start_dir):
