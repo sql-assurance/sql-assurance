@@ -27,6 +27,10 @@ For testing purposes we have created different Test Cases, at the moment we are 
 
 - **StatisticalHypothesisTestCase**: This test case helps you to assure the quality of your data, for instance, today I had 1000 new records on this table, does that makes sense comparing with the historical data you have?
 
+- [x] PerformanceTestCase, basic assert_timing
+- [ ] StatisticalHypothesisTestCase
+- [ ] SchemaTestCase (but included in the main SQLTestCase)
+
 ## Examples
 
 ### PerformanceTestCase
