@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('README.md') as readme_file:
     readme = readme_file.read()
@@ -26,22 +26,23 @@ test_requirements = [
 
 setup(
     name='sql_assurance',
-    version='0.0.0',
+    version='0.0.1',
     description="Audit your databases",
     long_description=readme + '\n\n' + history,
     author="Sergio Sola",
     author_email='introduccio@gmail.com',
     url='https://github.com/ssola/sql_assurance',
-    packages=[
-        'sql_assurance',
-    ],
-    package_dir={'sql_assurance':
-                 'sql_assurance'},
+    packages=find_packages(exclude=['tests', 'docs']),
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
     keywords='sql_assurance',
+        entry_points={
+        'console_scripts': [
+            'sql-assurance = sql_assurance.cli:main',
+        ]
+    },
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
